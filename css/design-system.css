@@ -1,0 +1,175 @@
+/* ==========================================================================
+   ATTENDAI DESIGN SYSTEM
+   Team: NEXT GEN | Project: AI ATTENDANCE SYSTEM
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* Core Brand Colors */
+  --color-navy-dark: #1F1E3A;
+  --color-navy-deep: #29284F;
+  --color-navy-light: #353461;
+  --color-navy-border: #424075;
+  --color-navy-hover: #3d3b70;
+
+  /* Accent Colors */
+  --color-lavender: #9D99E8;
+  --color-lavender-soft: #C5C2F6;
+  --color-lavender-bg: rgba(157, 153, 232, 0.12);
+  --color-lavender-glow: rgba(157, 153, 232, 0.25);
+
+  /* Status Colors */
+  --color-present: #10B981;
+  --color-present-bg: rgba(16, 185, 129, 0.12);
+  --color-present-border: rgba(16, 185, 129, 0.3);
+
+  --color-late: #F59E0B;
+  --color-late-bg: rgba(245, 158, 11, 0.12);
+  --color-late-border: rgba(245, 158, 11, 0.3);
+
+  --color-absent: #EF4444;
+  --color-absent-bg: rgba(239, 68, 68, 0.12);
+  --color-absent-border: rgba(239, 68, 68, 0.3);
+
+  --color-partial: #8B87DD;
+  --color-partial-bg: rgba(139, 135, 221, 0.12);
+  --color-partial-border: rgba(139, 135, 221, 0.3);
+
+  --color-uncertain: #D97706;
+  --color-uncertain-bg: rgba(217, 119, 6, 0.14);
+  --color-uncertain-border: rgba(217, 119, 6, 0.35);
+
+  /* Light Theme (Default Warm White) */
+  --bg-app: #F7F5F1;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-subtle: #F1EFEA;
+  --bg-sidebar: #29284F;
+  --bg-sidebar-active: #353461;
+  --bg-header: #FFFFFF;
+
+  --text-primary: #1F1E3A;
+  --text-secondary: #5E5B7E;
+  --text-muted: #8E8BA5;
+  --text-inverse: #F7F5F1;
+  --text-sidebar: #D1CFE8;
+  --text-sidebar-active: #FFFFFF;
+
+  --border-color: #E6E2D8;
+  --border-subtle: #ECE8E0;
+  --border-focus: #9D99E8;
+
+  --shadow-sm: 0 1px 3px rgba(31, 30, 58, 0.05);
+  --shadow-md: 0 4px 14px rgba(31, 30, 58, 0.08);
+  --shadow-lg: 0 10px 30px rgba(31, 30, 58, 0.12);
+  --shadow-glass: 0 8px 32px 0 rgba(41, 40, 79, 0.1);
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --sidebar-collapsed-width: 78px;
+  --header-height: 70px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  /* Animation */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Dark Theme Override */
+[data-theme="dark"] {
+  --bg-app: #151428;
+  --bg-surface: #1F1E3A;
+  --bg-surface-elevated: #29284F;
+  --bg-surface-subtle: #252445;
+  --bg-sidebar: #191832;
+  --bg-sidebar-active: #29284F;
+  --bg-header: #1F1E3A;
+
+  --text-primary: #F7F5F1;
+  --text-secondary: #B4B1D6;
+  --text-muted: #827EAA;
+  --text-inverse: #1F1E3A;
+  --text-sidebar: #B4B1D6;
+  --text-sidebar-active: #FFFFFF;
+
+  --border-color: #2F2E57;
+  --border-subtle: #272648;
+  --border-focus: #9D99E8;
+
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 36px rgba(0, 0, 0, 0.5);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-body);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+input, select, textarea {
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-lavender);
+}

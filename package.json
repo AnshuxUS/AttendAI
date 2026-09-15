@@ -1,0 +1,23 @@
+{
+  "name": "attendai",
+  "version": "2.4.0",
+  "description": "Production-Quality AI Attendance Management Platform - Team: NEXT GEN",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "serve": "node server.js"
+  },
+  "keywords": [
+    "ai",
+    "attendance-system",
+    "edtech",
+    "saas",
+    "supabase",
+    "webrtc",
+    "computer-vision",
+    "bca-project"
+  ],
+  "author": "NEXT GEN (AI ATTENDANCE SYSTEM)",
+  "license": "MIT"
+}

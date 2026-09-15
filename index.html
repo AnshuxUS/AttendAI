@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AttendAI — Smarter Attendance. Better Insights.</title>
+  <meta name="description" content="Production-Quality AI Attendance Management Platform for College BCA Project. Autonomous face verification, presence duration tracking, and EdTech analytics." />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Core Design Stylesheets -->
+  <link rel="stylesheet" href="css/design-system.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/camera.css" />
+  <link rel="stylesheet" href="css/ai-team.css" />
+</head>
+<body>
+
+  <div id="app-container">
+
+    <!-- ====================================================================
+         LEFT SIDEBAR NAVIGATION
+         Preserves exact visual identity, sections, team badge & footer
+         ==================================================================== -->
+    <aside class="sidebar" id="app-sidebar">
+      
+      <!-- Brand Logo -->
+      <div class="sidebar-brand">
+        <div class="brand-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <div class="brand-title">
+            <span>AttendAI</span>
+            <span class="brand-badge">PRO</span>
+          </div>
+          <div class="brand-sub">Smarter Attendance Platform</div>
+        </div>
+      </div>
+
+      <!-- Navigation Sections -->
+      <div class="sidebar-nav">
+        
+        <!-- MAIN SECTION -->
+        <div>
+          <div class="nav-section-title">Main</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link active" data-route="overview" onclick="window.appRouter.navigateTo('overview')">
+                <span class="nav-icon">📊</span>
+                <span>Overview</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="classes" onclick="window.appRouter.navigateTo('classes')">
+                <span class="nav-icon">🏫</span>
+                <span>Classes</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="students" onclick="window.appRouter.navigateTo('students')">
+                <span class="nav-icon">🎓</span>
+                <span>Students</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="attendance" onclick="window.appRouter.navigateTo('attendance')">
+                <span class="nav-icon">📋</span>
+                <span>Attendance</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="timetable" onclick="window.appRouter.navigateTo('timetable')">
+                <span class="nav-icon">🗓️</span>
+                <span>Timetable</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- CAMERA ATTENDANCE SHORTCUT -->
+        <div>
+          <div class="nav-section-title">Biometrics</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="camera" onclick="window.appRouter.navigateTo('camera')">
+                <span class="nav-icon">📷</span>
+                <span>Camera Session</span>
+                <span class="nav-badge" style="background: rgba(16, 185, 129, 0.2); color: var(--color-present);">LIVE</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- OPERATIONS SECTION -->
+        <div>
+          <div class="nav-section-title">Operations</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="reports" onclick="window.appRouter.navigateTo('reports')">
+                <span class="nav-icon">📈</span>
+                <span>Reports & Analytics</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="notifications" onclick="window.appRouter.navigateTo('notifications')">
+                <span class="nav-icon">🔔</span>
+                <span>Notifications</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- AI PLATFORM SECTION -->
+        <div>
+          <div class="nav-section-title">AI Platform</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="ai-assistant" onclick="window.appRouter.navigateTo('ai-assistant')">
+                <span class="nav-icon">⚡</span>
+                <span>AI Assistant</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="ai-team" onclick="window.appRouter.navigateTo('ai-team')">
+                <span class="nav-icon">🤖</span>
+                <span>AI Dev Team</span>
+                <span class="nav-badge">9 Agents</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- FILES SECTION -->
+        <div>
+          <div class="nav-section-title">Files</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="files" onclick="window.appRouter.navigateTo('files')">
+                <span class="nav-icon">📁</span>
+                <span>File Manager</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- ADMINISTRATION SECTION -->
+        <div>
+          <div class="nav-section-title">Administration</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="users" onclick="window.appRouter.navigateTo('users')">
+                <span class="nav-icon">👥</span>
+                <span>User Management</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="audit" onclick="window.appRouter.navigateTo('audit')">
+                <span class="nav-icon">🛡️</span>
+                <span>Audit Logs</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- SYSTEM SECTION -->
+        <div>
+          <div class="nav-section-title">System</div>
+          <ul class="nav-list">
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" data-route="settings" onclick="window.appRouter.navigateTo('settings')">
+                <span class="nav-icon">⚙️</span>
+                <span>Settings</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="javascript:void(0)" class="nav-link" onclick="window.appRouter.exportProjectBundle()">
+                <span class="nav-icon">📦</span>
+                <span>Export Project Files</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Sidebar Team Credits Footer -->
+      <div class="sidebar-footer">
+        <div class="team-pill">
+          <span class="project-tag">PROJECT: BCA CAPSTONE</span>
+          <span class="team-name">NEXT GEN</span>
+        </div>
+        <div style="font-size: 10px; color: rgba(255, 255, 255, 0.45);">
+          AI ATTENDANCE SYSTEM v2.4
+        </div>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN VIEWPORT & TOP HEADER
+         ==================================================================== -->
+    <div class="main-wrapper">
+      
+      <!-- Top Navigation Header -->
+      <header class="top-header">
+        
+        <div class="header-left">
+          <!-- Mobile Hamburger Toggle -->
+          <button class="sidebar-toggle-btn" onclick="document.getElementById('app-sidebar').classList.toggle('mobile-open')">
+            ☰
+          </button>
+          
+          <!-- Universal Search Bar -->
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.6;">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" placeholder="Search students, classes, faculty, or attendance records..." onkeydown="if(event.key === 'Enter') window.appRouter.quickAIQuery(this.value)" />
+          </div>
+        </div>
+
+        <div class="header-right">
+          
+          <!-- System Status Indicator -->
+          <div class="system-status-indicator" id="header-system-status-indicator">
+            <span class="status-dot"></span>
+            <span>SYSTEM ONLINE • READY</span>
+          </div>
+
+          <!-- Quick Role Switcher Pill -->
+          <div class="role-pill-selector" title="Switch User Role for Evaluation">
+            <span style="font-size: 11px; font-weight: 700;">ROLE:</span>
+            <select id="quick-role-switcher" onchange="window.authServiceApp.switchRole(this.value)">
+              <option value="TEACHER">TEACHER (Dr. Priya Nair)</option>
+              <option value="ADMINISTRATOR">ADMINISTRATOR (System Admin)</option>
+              <option value="STUDENT">STUDENT (Aarav Sharma)</option>
+              <option value="DEVELOPER">DEVELOPER (Alex Vance)</option>
+            </select>
+          </div>
+
+          <!-- Header Actions -->
+          <div class="header-actions">
+            
+            <!-- Notifications Bell -->
+            <button class="action-btn" onclick="window.appRouter.navigateTo('notifications')" title="Notifications">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+              </svg>
+              <span class="notification-count" id="header-notif-badge">2</span>
+            </button>
+
+            <!-- Theme Toggle -->
+            <button class="action-btn" onclick="window.themeApp.toggleTheme()" title="Toggle Light / Dark Mode">
+              <span id="theme-toggle-icon">🌙</span>
+            </button>
+          </div>
+
+          <!-- User Profile Dropdown Pill -->
+          <div class="user-profile-btn" onclick="window.appRouter.navigateTo('settings')">
+            <img id="header-user-avatar" class="user-avatar" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150" alt="Avatar" />
+            <div class="user-text-info">
+              <span class="user-name-label" id="header-user-name">Dr. Priya Nair</span>
+              <span class="user-role-label" id="header-user-role">TEACHER</span>
+            </div>
+          </div>
+
+        </div>
+      </header>
+
+      <!-- Main Dynamic Content Canvas -->
+      <main class="main-content" id="main-content-canvas">
+        <!-- Rendered by window.appRouter -->
+      </main>
+
+    </div>
+
+  </div>
+
+  <!-- ====================================================================
+       MODAL DIALOG BACKDROP & CONTAINER
+       ==================================================================== -->
+  <div class="modal-backdrop" id="app-modal-backdrop" onclick="if(event.target === this) window.appRouter.closeModal()">
+    <div class="modal-content" id="app-modal-content">
+      <!-- Populated dynamically by Router -->
+    </div>
+  </div>
+
+  <!-- ====================================================================
+       SLIDE-OVER PROFILE DRAWER
+       ==================================================================== -->
+  <div class="drawer-backdrop" id="app-drawer-backdrop" onclick="window.studentsViewApp?.closeDrawer()"></div>
+  <div class="drawer-panel" id="app-drawer-panel">
+    <!-- Populated dynamically by studentsViewApp -->
+  </div>
+
+  <!-- Application Bootstrap Modules -->
+  <script type="module" src="js/app.js"></script>
+
+  <!-- Global Utility Scripts -->
+  <script>
+    // Theme toggle utility
+    window.themeApp = {
+      toggleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('attendai_theme', next);
+        document.getElementById('theme-toggle-icon').textContent = next === 'dark' ? '☀️' : '🌙';
+      }
+    };
+
+    // Role switcher helper
+    import('./js/auth.js').then(module => {
+      window.authServiceApp = {
+        switchRole(role) {
+          module.auth.switchRole(role);
+          window.appRouter?.showToast(`Active profile switched to ${role}`);
+        }
+      };
+    });
+  </script>
+</body>
+</html>
