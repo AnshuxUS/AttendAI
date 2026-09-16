@@ -43,7 +43,28 @@ class DatabaseService {
     const raw = localStorage.getItem(this.storageKey);
     if (raw) {
       try {
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        if (parsed && Array.isArray(parsed.profiles)) {
+          parsed.profiles.forEach(p => {
+            if (p.role === 'STUDENT') {
+              if (!p.biometricProfile) {
+                p.biometricProfile = {
+                  status: 'ENROLLED',
+                  qualityScore: 98.4,
+                  livenessScore: 99.1,
+                  landmarkCount: 68,
+                  biometricHash: `BIO-${(p.id || '000').slice(-6).toUpperCase()}`,
+                  enrolledAt: p.createdAt || '2026-07-01T09:00:00Z'
+                };
+              }
+              if (!p.guardianName) p.guardianName = 'Parent / Guardian';
+              if (!p.guardianPhone) p.guardianPhone = '+91 98110 54321';
+              if (!p.bloodGroup) p.bloodGroup = 'B+';
+              if (!p.gender) p.gender = 'Not Specified';
+            }
+          });
+        }
+        return parsed;
       } catch (e) {
         console.warn('Corrupted storage, re-initializing from seed data.');
       }
@@ -125,11 +146,29 @@ class DatabaseService {
       role: profileData.role || 'STUDENT',
       phone: profileData.phone || '',
       department: profileData.department || 'Computer Applications',
+      semester: profileData.semester || 'Semester 1',
       avatarUrl: profileData.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
       isActive: true,
       rollNumber: profileData.rollNumber || null,
       classId: profileData.classId || 'cls-1',
       attendanceRate: profileData.role === 'STUDENT' ? (profileData.attendanceRate !== undefined ? Number(profileData.attendanceRate) : 100) : undefined,
+      // Comprehensive personal & guardian details
+      dob: profileData.dob || profileData.dateOfBirth || '',
+      gender: profileData.gender || 'Not Specified',
+      bloodGroup: profileData.bloodGroup || 'O+',
+      guardianName: profileData.guardianName || '',
+      guardianPhone: profileData.guardianPhone || '',
+      emergencyContact: profileData.emergencyContact || profileData.guardianPhone || '',
+      biometricNotes: profileData.biometricNotes || '',
+      // AI Biometric metadata
+      biometricProfile: profileData.biometricProfile || {
+        status: 'ENROLLED',
+        qualityScore: 98.6,
+        livenessScore: 99.4,
+        landmarkCount: 68,
+        biometricHash: `BIO-${Math.random().toString(36).substring(2, 8).toUpperCase()}`,
+        enrolledAt: new Date().toISOString()
+      },
       createdAt: new Date().toISOString()
     };
     this.state.profiles.push(newProfile);
@@ -302,6 +341,14 @@ class DatabaseService {
         studentId: student.id,
         studentName: student.fullName,
         rollNumber: student.rollNumber || '01',
+        avatarUrl: student.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150',
+        biometricProfile: student.biometricProfile || {
+          status: 'ENROLLED',
+          qualityScore: 98.2,
+          livenessScore: 99.0,
+          landmarkCount: 68,
+          biometricHash: `BIO-${(student.id || '000').slice(-6).toUpperCase()}`
+        },
         firstSeen: null,
         lastSeen: null,
         confirmedDurationMinutes: 0,

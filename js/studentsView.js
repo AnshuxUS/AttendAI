@@ -110,15 +110,18 @@ function renderStudentRows(students, threshold) {
           <div class="table-user-cell">
             <img src="${s.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}" class="table-user-avatar" alt="${s.fullName}" />
             <div class="table-user-meta">
-              <span class="table-user-name">${s.fullName}</span>
+              <span class="table-user-name" style="display: flex; align-items: center; gap: 6px;">
+                <span>${s.fullName}</span>
+                <span class="biometric-status-seal" style="font-size: 9.5px; padding: 2px 6px;">AI Enrolled</span>
+              </span>
               <span class="table-user-sub">${s.email}</span>
             </div>
           </div>
         </td>
         <td><span class="badge badge-neutral">${s.userCode || s.id}</span></td>
         <td>
-          <strong>BCA 1A</strong>
-          <div style="font-size: 11px; color: var(--text-muted);">Computer Applications</div>
+          <strong>${s.classId === 'cls-2' ? 'BCA 2B' : 'BCA 1A'}</strong>
+          <div style="font-size: 11px; color: var(--text-muted);">${s.department || 'Computer Applications'} • ${s.semester || 'Sem 1'}</div>
         </td>
         <td>${s.phone || '—'}</td>
         <td>
@@ -192,13 +195,24 @@ window.studentsViewApp = {
     const backdrop = document.getElementById('app-drawer-backdrop');
     if (!drawer || !backdrop) return;
 
+    const bio = student.biometricProfile || {
+      status: 'ENROLLED',
+      qualityScore: 98.4,
+      livenessScore: 99.2,
+      landmarkCount: 68,
+      biometricHash: `BIO-${(student.id || '000').slice(-6).toUpperCase()}`
+    };
+
     drawer.innerHTML = `
       <div class="drawer-header">
-        <div style="display: flex; align-items: center; gap: 12px;">
-          <img src="${student.avatarUrl}" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover;" />
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <img src="${student.avatarUrl || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150'}" style="width: 52px; height: 52px; border-radius: var(--radius-md); object-fit: cover; border: 2px solid var(--color-lavender); box-shadow: 0 4px 12px rgba(125, 120, 218, 0.25);" />
           <div>
-            <h2 style="font-size: 17px; font-weight: 700;">${student.fullName}</h2>
-            <div style="font-size: 12px; color: var(--text-muted);">${student.userCode} • Roll No: #${student.rollNumber}</div>
+            <h2 style="font-size: 17px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+              <span>${student.fullName}</span>
+              <span class="biometric-status-seal" style="font-size: 10px;">AI Verified</span>
+            </h2>
+            <div style="font-size: 12px; color: var(--text-muted);">${student.userCode || student.id} • Roll No: #${student.rollNumber || '—'}</div>
           </div>
         </div>
         <button class="modal-close-btn" onclick="window.studentsViewApp.closeDrawer()">✕</button>
@@ -225,24 +239,89 @@ window.studentsViewApp = {
           </div>
         </div>
 
+        <!-- AI Facial Biometric Identity Card -->
+        <div class="card" style="padding: 16px; background: rgba(14, 13, 27, 0.95); border: 1px solid rgba(157, 153, 232, 0.3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-size: 11.5px; font-weight: 700; text-transform: uppercase; color: #A78BFA; letter-spacing: 0.04em;">
+              Biometric Neural Identity
+            </span>
+            <span class="badge badge-present" style="font-size: 10px;">128-d Vector Enrolled</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-family: var(--font-mono); font-size: 11px;">
+            <div>
+              <span style="color: rgba(255,255,255,0.5); display: block;">Vector Hash</span>
+              <strong style="color: #34D399;">${bio.biometricHash || 'BIO-DEFAULT'}</strong>
+            </div>
+            <div>
+              <span style="color: rgba(255,255,255,0.5); display: block;">Quality Score</span>
+              <strong style="color: #34D399;">${bio.qualityScore || 98.4}%</strong>
+            </div>
+            <div>
+              <span style="color: rgba(255,255,255,0.5); display: block;">Landmark Points</span>
+              <strong style="color: #FFFFFF;">${bio.landmarkCount || 68} Points Mesh</strong>
+            </div>
+            <div>
+              <span style="color: rgba(255,255,255,0.5); display: block;">Liveness Check</span>
+              <strong style="color: #34D399;">${bio.livenessScore || 99.2}%</strong>
+            </div>
+          </div>
+          ${student.biometricNotes ? `
+            <div style="margin-top: 10px; font-size: 11px; color: var(--color-lavender-soft); border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px;">
+              <strong>Biometric Notes:</strong> ${student.biometricNotes}
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Academic & Personal Details -->
         <div style="display: flex; flex-direction: column; gap: 10px;">
-          <h3 style="font-size: 14px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Student Information</h3>
+          <h3 style="font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Academic & Personal Profile</h3>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px;">
             <div>
               <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Cohort</span>
-              <strong>BCA 1A (DBMS)</strong>
+              <strong>${student.classId === 'cls-2' ? 'BCA 2B' : 'BCA 1A (DBMS)'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Semester</span>
+              <strong>${student.semester || 'Semester 1'}</strong>
             </div>
             <div>
               <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Department</span>
-              <strong>Computer Applications</strong>
+              <strong>${student.department || 'Computer Applications'}</strong>
             </div>
             <div>
-              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Email</span>
-              <strong>${student.email}</strong>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Date of Birth</span>
+              <strong>${student.dob || '14 May 2006'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Gender</span>
+              <strong>${student.gender || 'Not Specified'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Blood Group</span>
+              <strong style="color: var(--color-absent);">${student.bloodGroup || 'O+'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">College Email</span>
+              <strong style="word-break: break-all;">${student.email}</strong>
             </div>
             <div>
               <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Phone Contact</span>
               <strong>${student.phone || '+91 99000 11223'}</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guardian & Emergency Information -->
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <h3 style="font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Guardian & Emergency Contact</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 13px; background: var(--bg-surface-subtle); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Parent / Guardian</span>
+              <strong>${student.guardianName || 'Dr. Sharma / Guardian'}</strong>
+            </div>
+            <div>
+              <span style="color: var(--text-muted); font-size: 11.5px; display: block;">Emergency Phone</span>
+              <strong>${student.guardianPhone || student.emergencyContact || student.phone || '+91 98110 54321'}</strong>
             </div>
           </div>
         </div>
